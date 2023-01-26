@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GlubApp.Data\GlubApp.Data.csproj" />
+    <ProjectReference Include="..\GlubApp.Utils\GlubApp.Utils.csproj" />
   </ItemGroup>
 
 </Project>

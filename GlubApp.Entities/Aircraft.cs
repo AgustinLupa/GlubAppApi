@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GlubApp.Entities
 {
-    public class Airplane
+    public class Aircraft
     {
         public int Id { get; set; }
         public string Plate { get; set; } = string.Empty;
