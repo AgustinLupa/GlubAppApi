@@ -9,13 +9,13 @@ namespace GlubApp.Entities.DTOs
 {
     public class AircraftDTO
     {
-        [Required]
-        [MinLength(6, ErrorMessage = "Plate has to be 6 characters long.")]
-        [MaxLength(6, ErrorMessage = "Plate has to be 6 characters long.")]
+        [Required(ErrorMessage = "El campo Matrícula es requerido.")]
+        [MinLength(6, ErrorMessage = "La matrícula debe tener 6 caracteres.")]
+        [MaxLength(6, ErrorMessage = "La matrícula debe tener 6 caracteres.")]
         public string Plate { get; set; } =string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = "No se ha seleccionado un tipo de aeronave.")]
         public int AircraftType { get; set; }
-        public int IsFlying { get; set; }
+        public int IsFlying { get; set; }= 0;
     }
 }
