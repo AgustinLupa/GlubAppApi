@@ -7,16 +7,12 @@ using System.Threading.Tasks;
 
 namespace GlubApp.Entities.DTOs
 {
-    public class AircraftDTO
+    public class NewAircraftDTO
     {
         [Required(ErrorMessage = "El campo Matrícula es requerido.")]
         [MinLength(6, ErrorMessage = "La matrícula debe tener 6 caracteres.")]
         [MaxLength(6, ErrorMessage = "La matrícula debe tener 6 caracteres.")]
         public string Plate { get; set; } = string.Empty;
-
-        [MinLength(6, ErrorMessage = "La matrícula debe tener 6 caracteres.")]
-        [MaxLength(6, ErrorMessage = "La matrícula debe tener 6 caracteres.")]
-        public string? NewPlate { get; set; }
 
         [Required(ErrorMessage = "No se ha seleccionado un tipo de aeronave.")]
         public int AircraftType { get; set; }

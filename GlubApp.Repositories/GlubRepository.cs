@@ -35,13 +35,14 @@ namespace GlubApp.Repositories
             }
         }
 
-        public async Task CreateAircraft(AircraftDTO aircraft)
+        public async Task CreateAircraft(NewAircraftDTO aircraft)
         {
             const string procedureName = "NewAircraft";
             var parameters = new DynamicParameters();
             parameters.Add("plate", aircraft.Plate, DbType.String, ParameterDirection.Input);
+            //parameters.Add("newplate", aircraft.NewPlate, DbType.String, ParameterDirection.Input);
             parameters.Add("airType", aircraft.AircraftType, DbType.Boolean, ParameterDirection.Input);
-            parameters.Add("isFlying", aircraft.IsFlying, DbType.Boolean, ParameterDirection.Input);
+            parameters.Add("isFlying", aircraft.isFlying, DbType.Boolean, ParameterDirection.Input);
 
             using (var connection = _context.CreateConnection())
             {
@@ -66,7 +67,7 @@ namespace GlubApp.Repositories
         public async Task<Aircraft> GetAircraftByPlate(string plate)
         {
             plate = plate.Trim().ToUpper();
-            const string procedureName= "getAircraftFromPlate";
+            const string procedureName= "GetAircraftFromPlate";
             var parameters = new DynamicParameters();
             parameters.Add("plate", plate, DbType.String, ParameterDirection.Input);
 
@@ -81,7 +82,7 @@ namespace GlubApp.Repositories
 
         public async Task<IEnumerable<Aircraft>> GetAllAircrafts()
         {
-            const string procedureName= "getAircraft";
+            const string procedureName= "GetAircraft";
 
             using (var connection = _context.CreateConnection())
             {
@@ -94,7 +95,7 @@ namespace GlubApp.Repositories
 
         public async Task<IEnumerable<Aircraft>> GetAllFlyingAircrafts()
         {
-            const string procedureName= "getAircraftFlying";
+            const string procedureName= "GetAircraftFlying";
 
             using (var cnn = _context.CreateConnection())
             {
@@ -110,7 +111,8 @@ namespace GlubApp.Repositories
             const string procedureName= "ModifAircraft";
             var parameters = new DynamicParameters();
             parameters.Add("plate", aircraft.Plate, DbType.String, ParameterDirection.Input);
-            parameters.Add("aircraftType", aircraft.AircraftType, DbType.Boolean, ParameterDirection.Input);
+            parameters.Add("newplate", aircraft.NewPlate, DbType.String, ParameterDirection.Input);
+            parameters.Add("airType", aircraft.AircraftType, DbType.Byte, ParameterDirection.Input);
 
             using (var cnn = _context.CreateConnection())
             {
@@ -118,6 +120,21 @@ namespace GlubApp.Repositories
                     commandType: CommandType.StoredProcedure);
             }
         }
-        
+
+        public async Task UpdatePosition(PositionDTO position)
+        {
+            const string procedureName = "UpdatePosition";
+            var parameters = new DynamicParameters();
+            parameters.Add("plate", position.Plate, DbType.String, ParameterDirection.Input);
+            parameters.Add("latitude", position.Latitude, DbType.Double, ParameterDirection.Input);
+            parameters.Add("longitude", position.Longitude, DbType.Double, ParameterDirection.Input);            
+
+            using (var cnn = _context.CreateConnection())
+            {
+                await cnn.ExecuteAsync(procedureName, parameters,
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
     }
 }

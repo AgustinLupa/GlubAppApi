@@ -24,7 +24,7 @@ namespace GlubApp.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAircraft([FromBody] AircraftDTO aircraft)
+        public async Task<IActionResult> CreateAircraft([FromBody] NewAircraftDTO aircraft)
         {
             await _glubRepo.CreateAircraft(aircraft);
 
@@ -85,5 +85,16 @@ namespace GlubApp.API.Controllers
             return Ok();
         }
 
+        [HttpPut]
+        [Route("geolocation")]
+        public async Task<IActionResult> UpdatePosition([FromBody] PositionDTO position)
+        {
+            var search = await _glubRepo.GetAircraftByPlate(position.Plate);
+            if (search is null)
+                return NotFound();
+
+            await _glubRepo.UpdatePosition(position);
+            return Ok();
+        }
     }
 }
