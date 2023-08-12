@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GlubApp.Data\GlubApp.Data.csproj" />
+    <ProjectReference Include="..\GlubApp.Utils\GlubApp.Utils.csproj" />
+  </ItemGroup>
+
+</Project>
