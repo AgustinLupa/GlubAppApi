@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlubApp.Data", "GlubApp.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlubApp.Entities", "GlubApp.Entities\GlubApp.Entities.csproj", "{4E9F3A63-63FB-4B02-BA38-090B82F7C329}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlubApp.Repositories", "GlubApp.Repositories\GlubApp.Repositories.csproj", "{BA2A44C4-61AA-4B95-B41F-14CF62B3EA8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlubApp.Repositories", "GlubApp.Repositories\GlubApp.Repositories.csproj", "{BA2A44C4-61AA-4B95-B41F-14CF62B3EA8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlubApp.Utils", "GlubApp.Utils\GlubApp.Utils.csproj", "{C87425F3-662F-41E1-AC9D-05692BF44228}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlubApp.Utils", "GlubApp.Utils\GlubApp.Utils.csproj", "{C87425F3-662F-41E1-AC9D-05692BF44228}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlubApp.UI", "GlubApp.UI\GlubApp.UI.csproj", "{146F4B7F-CF34-4D09-BEDB-BFD8B80E1139}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C87425F3-662F-41E1-AC9D-05692BF44228}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C87425F3-662F-41E1-AC9D-05692BF44228}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C87425F3-662F-41E1-AC9D-05692BF44228}.Release|Any CPU.Build.0 = Release|Any CPU
+		{146F4B7F-CF34-4D09-BEDB-BFD8B80E1139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{146F4B7F-CF34-4D09-BEDB-BFD8B80E1139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{146F4B7F-CF34-4D09-BEDB-BFD8B80E1139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{146F4B7F-CF34-4D09-BEDB-BFD8B80E1139}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

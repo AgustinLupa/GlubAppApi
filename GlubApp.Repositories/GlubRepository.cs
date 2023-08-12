@@ -35,13 +35,14 @@ namespace GlubApp.Repositories
             }
         }
 
-        public async Task CreateAircraft(AircraftDTO aircraft)
+        public async Task CreateAircraft(NewAircraftDTO aircraft)
         {
             const string procedureName = "NewAircraft";
             var parameters = new DynamicParameters();
-            parameters.Add("plate", aircraft.Plate, DbType.String);
-            parameters.Add("airType", aircraft.AircraftType, DbType.Boolean);
-            parameters.Add("isFlying", aircraft.IsFlying, DbType.Boolean);
+            parameters.Add("plate", aircraft.Plate, DbType.String, ParameterDirection.Input);
+            //parameters.Add("newplate", aircraft.NewPlate, DbType.String, ParameterDirection.Input);
+            parameters.Add("airType", aircraft.AircraftType, DbType.Boolean, ParameterDirection.Input);
+            parameters.Add("isFlying", aircraft.isFlying, DbType.Boolean, ParameterDirection.Input);
 
             using (var connection = _context.CreateConnection())
             {
@@ -54,7 +55,7 @@ namespace GlubApp.Repositories
         {
             const string procedureName = "DeleteAircraft";
             var parameters = new DynamicParameters();
-            parameters.Add("plate", plate, DbType.String);
+            parameters.Add("plate", plate, DbType.String, ParameterDirection.Input);
 
             using (var connection = _context.CreateConnection())
             {
@@ -65,12 +66,23 @@ namespace GlubApp.Repositories
 
         public async Task<Aircraft> GetAircraftByPlate(string plate)
         {
-            throw new NotImplementedException();
+            plate = plate.Trim().ToUpper();
+            const string procedureName= "GetAircraftFromPlate";
+            var parameters = new DynamicParameters();
+            parameters.Add("plate", plate, DbType.String, ParameterDirection.Input);
+
+            using (var cnn = _context.CreateConnection())
+            {
+                var aircraft = await cnn.QuerySingleOrDefaultAsync<Aircraft>(procedureName, parameters,
+                    commandType: CommandType.StoredProcedure);
+
+                return aircraft;
+            }
         }
 
         public async Task<IEnumerable<Aircraft>> GetAllAircrafts()
         {
-            const string procedureName= "getAircraft";
+            const string procedureName= "GetAircraft";
 
             using (var connection = _context.CreateConnection())
             {
@@ -83,14 +95,46 @@ namespace GlubApp.Repositories
 
         public async Task<IEnumerable<Aircraft>> GetAllFlyingAircrafts()
         {
-            throw new NotImplementedException();
+            const string procedureName= "GetAircraftFlying";
+
+            using (var cnn = _context.CreateConnection())
+            {
+                var aircrafts = await cnn.QueryAsync<Aircraft>(procedureName, 
+                    commandType: CommandType.StoredProcedure);
+
+                return aircrafts.ToList();
+            }
         }
 
         public async Task UpdateAircraft(AircraftDTO aircraft)
         {
-            throw new NotImplementedException();
+            const string procedureName= "ModifAircraft";
+            var parameters = new DynamicParameters();
+            parameters.Add("plate", aircraft.Plate, DbType.String, ParameterDirection.Input);
+            parameters.Add("newplate", aircraft.NewPlate, DbType.String, ParameterDirection.Input);
+            parameters.Add("airType", aircraft.AircraftType, DbType.Byte, ParameterDirection.Input);
+
+            using (var cnn = _context.CreateConnection())
+            {
+                await cnn.ExecuteAsync(procedureName, parameters, 
+                    commandType: CommandType.StoredProcedure);
+            }
         }
 
-        
+        public async Task UpdatePosition(PositionDTO position)
+        {
+            const string procedureName = "UpdatePosition";
+            var parameters = new DynamicParameters();
+            parameters.Add("plate", position.Plate, DbType.String, ParameterDirection.Input);
+            parameters.Add("latitude", position.Latitude, DbType.Double, ParameterDirection.Input);
+            parameters.Add("longitude", position.Longitude, DbType.Double, ParameterDirection.Input);            
+
+            using (var cnn = _context.CreateConnection())
+            {
+                await cnn.ExecuteAsync(procedureName, parameters,
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
     }
 }

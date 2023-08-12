@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using GlubApp.Entities;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TableDependency.SqlClient;
 
 namespace GlubApp.Data;
 
@@ -21,4 +23,5 @@ public class GlubContext
     }
 
     public IDbConnection CreateConnection() => new SqlConnection(_connectionString);
+    public SqlTableDependency<Aircraft> ServiceBrokerConnection() => new SqlTableDependency<Aircraft>(_connectionString);
 }

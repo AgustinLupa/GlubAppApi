@@ -12,5 +12,7 @@ namespace GlubApp.Entities
         public string Plate { get; set; } = string.Empty;
         public int AircraftType { get; set; }
         public bool IsFlying { get; set; }
+        public double Latitude { get; set; } = 0;
+        public double Longitude { get; set; } = 0;
     }
 }

@@ -13,10 +13,10 @@ namespace GlubApp.Utils.Contracts
         public Task<IEnumerable<Aircraft>> GetAllAircrafts();
         public Task<IEnumerable<Aircraft>> GetAllFlyingAircrafts();
         public Task<Aircraft> GetAircraftByPlate(string plate);
-        public Task CreateAircraft(AircraftDTO aircraft);
+        public Task CreateAircraft(NewAircraftDTO aircraft);
         public Task UpdateAircraft(AircraftDTO aircraft);
         public Task ChangeFlyingState(string plate);
         public Task DeleteAircraft(string plate);
-
+        Task UpdatePosition(PositionDTO position);
     }
 }
